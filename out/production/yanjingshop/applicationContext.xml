@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+   <!-- 连接数据库 bean -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml">
+		</property>
+		</bean>
+	<!-- 模板bean -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- dao bean -->
+	  <!-- 用户 bean -->
+	<bean id="userdao" class="com.dao.impi.UserinfoDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!--  bean -->
+	<bean id="goodsdao" class="com.dao.impi.GoodsDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!-- 种类 bean -->
+	<bean id="ftypedao" class="com.dao.impi.FtypeDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!-- 订单  bean -->
+	<bean id="orderdao" class="com.dao.impi.OrderDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!-- 配送  bean -->
+	<!-- <bean id="peisongdao" class="com.dao.impi.PeisongDaoImpi" scope="prototype">
+		<property name="hiberateTemplate" ref="hibernateTemplate"></property>
+	</bean> -->
+	<!-- 购物车 bean -->
+	<bean id="shopdao" class="com.dao.impi.ShopDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!-- 广告 bean -->
+	<bean id="guanggaodao" class="com.dao.impi.GuangGaoDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<bean id="newsdao" class="com.dao.impi.NewsDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!-- <bean id="linkdao" class="com.dao.impi.LinkDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean> -->
+	<bean id="keepdao" class="com.dao.impi.KeepDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<!-- <bean id="bbsdao" class="com.dao.impi.BbsDaoImpi" scope="prototype">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean> -->
+	<!-- service bean -->
+	<!-- 用户 bean -->
+	<bean id="userservice" class="com.service.impi.UserinfoServiceImpi" scope="prototype">
+		<property name="ud" ref="userdao"></property>
+	</bean>
+	<!--  bean -->
+	<bean id="goodsservice" class="com.service.impi.GoodsServiceImpi" scope="prototype">
+		<property name="fd" ref="goodsdao"></property>
+	</bean>
+	<!-- 种类 bean -->
+	<bean id="ftypeservice" class="com.service.impi.FtypeServiceImpi" scope="prototype">
+		<property name="fd" ref="ftypedao"></property>
+	</bean>
+	<!-- 订单 bean -->
+	<bean id="orderservice" class="com.service.impi.OrderServiceImpi" scope="prototype">
+		<property name="od" ref="orderdao"></property>
+	</bean>
+	<!--  bean -->
+	<!-- <bean id="peisongservice" class="com.service.impi.PeisongServiceImpi" scope="prototype">
+		<property name="pd" ref="peisongdao"></property>
+	</bean> -->
+	<!-- 购物车 bean -->
+	<bean id="shopservice" class="com.service.impi.ShopServiceImpi" scope="prototype">
+		<property name="sd" ref="shopdao"></property>
+	</bean>
+	<!-- 广告bean -->
+	<bean id="guanggaoservice" class="com.service.impi.GuangGaoServiceImpi" scope="prototype">
+		<property name="ggd" ref="guanggaodao"></property>
+	</bean>
+	<bean id="keepservice" class="com.service.impi.KeepServiceImpi" scope="prototype">
+		<property name="kd" ref="keepdao"></property>
+	</bean>
+	<!-- <bean id="bbsservice" class="com.service.impi.BbsServiceImpi" scope="prototype">
+		<property name="fd" ref="bbsdao"></property>
+	</bean>
+	<bean id="linkservice" class="com.service.impi.LinkServcieImpi" scope="prototype">
+		<property name="ld" ref="linkdao"></property>
+	</bean> -->
+	<bean id="newsservice" class="com.service.impi.NewsServcieImpi" scope="prototype">
+		<property name="nd" ref="newsdao"></property>
+	</bean>
+	<!-- action bean -->
+	<!-- 用户  action -->
+	<bean id="uaction" class="com.action.UsersAction" scope="prototype">
+		<property name="userinfoService" ref="userservice"></property>
+		<!-- <property name="peisongService" ref="peisongservice"></property> -->
+	</bean>
+	<!-- 种类action -->
+	<bean id="ftaction" class="com.action.FtypeAction" scope="prototype">
+		<property name="ftypeService" ref="ftypeservice"></property>
+		
+	</bean>
+	<!-- action -->
+	<bean id="faction" class="com.action.GoodsAction" scope="prototype">
+		<property name="goodsService" ref="goodsservice"></property>
+		<property name="ftypeService" ref="ftypeservice"></property>
+		<!-- <property name="peisongService" ref="peisongservice"></property> -->
+		<property name="orderService" ref="orderservice"></property>
+		<property name="guangGaoService" ref="guanggaoservice"></property>
+		<property name="userinfoService" ref="userservice"></property>
+	<!-- 	 <property name="bbsService" ref="bbsservice"></property> -->
+	</bean>
+	<!-- 配送 action -->
+	<!-- <bean id="paction" class="com.action.PeisongAction" scope="prototype">
+		<property name="peisongService" ref="peisongservice"></property>
+	</bean> -->
+	<!-- 订单  action -->
+	<bean id="oaction" class="com.action.OrderAction" scope="prototype">
+		<property name="orderService" ref="orderservice"></property>
+		<property name="userinfoService" ref="userservice"></property>
+	    <property name="goodsService" ref="goodsservice"></property>
+	    <property name="shopService" ref="shopservice"></property>
+	   <!--  <property name="peisongService" ref="peisongservice"></property> -->
+	</bean>
+
+	<bean id="kaction" class="com.action.KeepAction" scope="prototype">
+		<property name="keepServcie" ref="keepservice"></property>
+	<!-- 	<property name="linkService" ref="linkservice"></property>
+	    <property name="newsService" ref="newsservice"></property>
+	   <property name="bbsService" ref="bbsservice"></property> -->
+	</bean>
+	<!-- 事务 bean -->
+	<bean id="mytran"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置事务 -->
+	<tx:advice id="myadvice" transaction-manager="mytran">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 切点 bean -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.service.impi.*.*(..))"
+			id="mycut" />
+		<aop:advisor advice-ref="myadvice" pointcut-ref="mycut" />
+	</aop:config>
+</beans>
