@@ -185,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="reg">
 
   <div id="reg-top">&nbsp;&nbsp;&nbsp;&nbsp;会员注册</div>
-  <div id="reg-mleft">
+  <div id="reg-mleft" style="margin-top:10px;">
   <form method="post" action="adduser.action" onsubmit="return check();">
     <ul>
       <li class="m">用户名 </li>
@@ -224,12 +224,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <li class="m">问题答案 </li>
       <li class="r"><input name="user.question" type="text" class="box txtInit" id="txtName2" onblur="return checkname2()"/>
         <span id='prompt_name2' class="spanInit"  ></span> </li>
-     <li class="m">充值金额  </li>
+      <input name="user.money" type="hidden" value="0"/>
+     <%--<li class="m">充值金额  </li>
       <li class="r"><input name="user.money" type="text" class="box txtInit" id="" />
-        <span id='prompt_name' class="spanInit"  ></span> </li>
+        <span id='prompt_name' class="spanInit"  ></span> </li>--%>
      <li class="m">QQ  </li>
       <li class="r"><input name="user.qq" type="text" class="box txtInit" id="" />
-        <span id='prompt_name' class="spanInit"  ></span> </li>
+        <span id='prompt_name3' class="spanInit"  ></span> </li>
         <li class="m">年龄:</li>
       <li class="r"><input name="user.birth" type="text" class="box txtInit" id="" />
         <span id='prompt_name' class="spanInit"  ></span> </li>

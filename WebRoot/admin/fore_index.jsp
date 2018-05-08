@@ -71,6 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <form action="getorder.action" method="post" onsubmit="return checkOid()">
         <ul>
           <li class="cls1"><a href="orderpj.action">我的订单</a></li>
+            <li class="cls1"><a href="doChongZhi.action">充值</a></li>
           <li class="cls1"><a href="chongzhi.action">充值记录</a></li>
           <li class="cls1"><a href="showPersion.action">个人信息</a></li>
           <li class="cls1"><a href="getAllKeep.action?keep.uid=<s:property value="#session.user.uid"/>">我的收藏</a></li>
